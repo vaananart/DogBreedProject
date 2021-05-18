@@ -19,15 +19,18 @@ namespace DogBreedingWebApp.Controllers.Dogs
 		}
 
 		[HttpGet]
-		public IEnumerable<DogModel> GetAllBreedsAndPossibleSubBreeds()
+		public IActionResult GetAllBreedsAndPossibleSubBreeds()
 		{
-			return _dogService.GetAllBreed();
+			var result = _dogService.GetAllBreed();
+			return Ok(result);
 		}
 
 		[HttpGet("{breed}/subbreed")]
-		public IEnumerable<string> GetAllBreedsAndPossibleSubBreedsImageURL(string breed, string subbreed = null)
+		public IActionResult GetAllBreedsAndPossibleSubBreedsImageURL(string breed, string subbreed = null)
 		{
-			return _dogService.GellAllBreedImageURLs(breed, subbreed);
+			var result = _dogService.GellAllBreedImageURLs(breed, subbreed);
+
+			return Ok(result);
 		}
 	}
 }
