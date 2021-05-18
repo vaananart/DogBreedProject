@@ -10,12 +10,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementations\Services\" />
-    <Folder Include="Implementations\Utils\http\" />
-    <Folder Include="Interfaces\Services\" />
-    <Folder Include="Interfaces\Utils\Http\" />
-  </ItemGroup>
-
 
 </Project>

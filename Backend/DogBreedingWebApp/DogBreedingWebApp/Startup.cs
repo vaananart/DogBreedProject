@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using DogBreedingWebApp.Implementations.Services;
+using DogBreedingWebApp.Implementations.Utils.Http;
+using DogBreedingWebApp.Interfaces.Services;
+using DogBreedingWebApp.Interfaces.Utils.Http;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +32,10 @@ namespace DogBreedingWebApp
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddSingleton<IDogService, DogService>()
+						.AddSingleton<IHttpGETClient, HttpGETClient>()
+						.AddHttpClient();
+						
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
