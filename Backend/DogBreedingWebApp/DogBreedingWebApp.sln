@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogBreedingWebApp", "DogBreedingWebApp\DogBreedingWebApp.csproj", "{14F40631-5087-4550-9D66-5C13CFE0D013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogBreedingWebAppTests", "DogBreedingWebAppTests\DogBreedingWebAppTests.csproj", "{A6753A6B-BBAE-45CA-9879-3539B8EEB796}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{14F40631-5087-4550-9D66-5C13CFE0D013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F40631-5087-4550-9D66-5C13CFE0D013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F40631-5087-4550-9D66-5C13CFE0D013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6753A6B-BBAE-45CA-9879-3539B8EEB796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6753A6B-BBAE-45CA-9879-3539B8EEB796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6753A6B-BBAE-45CA-9879-3539B8EEB796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6753A6B-BBAE-45CA-9879-3539B8EEB796}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
