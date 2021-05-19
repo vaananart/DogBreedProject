@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using DogBreedingWebApp.DataModels;
 using DogBreedingWebApp.Interfaces.Services;
@@ -19,9 +20,9 @@ namespace DogBreedingWebApp.Controllers.Dogs
 		}
 
 		[HttpGet]
-		public IActionResult GetAllBreedsAndPossibleSubBreeds()
+		public async Task<IActionResult> GetAllBreedsAndPossibleSubBreeds()
 		{
-			var result = _dogService.GetAllBreed();
+			var result = await _dogService.GetAllBreed();
 			return Ok(result);
 		}
 
