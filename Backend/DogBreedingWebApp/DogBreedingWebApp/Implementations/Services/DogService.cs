@@ -31,12 +31,18 @@ namespace DogBreedingWebApp.Implementations.Services
 			_getClient = getClient;
 		}
 
-		public IEnumerable<string> GellAllBreedImageURLs(string breed, string subbreed = null)
+		public async Task<IEnumerable<string>> GellAllBreedImageURLs(string breed, string subbreed = null)
 		{
 			var baseUrl = _applicationOptions.BaseUrl;
-			var breedApi = _apisOptions.SubBreedImageURL;
+			var breedApi = string.Format(_apisOptions.SubBreedImageURL, breed, !string.IsNullOrEmpty(subbreed) ? ("/"+ subbreed) : null );
+			var fullUrl = baseUrl + breedApi;
+			var rawPayload = await _getClient.Get(fullUrl);
+			var jObject = JObject.Parse(rawPayload);
 
-			return null;
+			var result = jObject["message"];
+			var rootLevel = jObject.Values();
+			var imageResult = rootLevel.FirstOrDefault().Select(x => (x as JValue).Value as string);
+			return imageResult;
 		}
 
 		public IEnumerable<string> GellAllSubBreedImageURLs(string breedName)
@@ -60,7 +66,6 @@ namespace DogBreedingWebApp.Implementations.Services
 
 			var resultList = from breed in resultPropertyNames
 							 from subBreed in (breed.Value as JArray)
-							 //from element in subBreed
 							 select new DogModel
 							 {
 								 BreedName= breed.Name,

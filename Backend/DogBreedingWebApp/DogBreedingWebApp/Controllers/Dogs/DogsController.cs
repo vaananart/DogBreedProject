@@ -27,9 +27,9 @@ namespace DogBreedingWebApp.Controllers.Dogs
 		}
 
 		[HttpGet("{breed}/subbreed")]
-		public IActionResult GetAllBreedsAndPossibleSubBreedsImageURL(string breed, string subbreed = null)
+		public async Task<IActionResult> GetAllBreedsAndPossibleSubBreedsImageURL(string breed, string subbreed = null)
 		{
-			var result = _dogService.GellAllBreedImageURLs(breed, subbreed);
+			var result = await _dogService.GellAllBreedImageURLs(breed, subbreed);
 
 			return Ok(result);
 		}

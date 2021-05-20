@@ -13,7 +13,7 @@ namespace DogBreedingWebApp.Interfaces.Services
 	{
 		IEnumerable<DogModel> GetAllSubBreed(string breedName);
 		Task<IEnumerable<DogModel>> GetAllBreed();
-		IEnumerable<string> GellAllBreedImageURLs(string breed, string subbreed = null);
+		Task<IEnumerable<string>> GellAllBreedImageURLs(string breed, string subbreed = null);
 		IEnumerable<string> GellAllSubBreedImageURLs(string breedName);
 	}
 }
