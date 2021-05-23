@@ -13,8 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Integration\" />
-    <Folder Include="Full-End-To-End\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DogBreedingWebApp\DogBreedingWebApp.csproj" />
   </ItemGroup>
 
 </Project>
