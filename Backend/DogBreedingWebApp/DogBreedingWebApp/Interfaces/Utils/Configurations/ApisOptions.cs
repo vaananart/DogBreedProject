@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DogBreedingWebApp.Interfaces.Utils.Configurations
+﻿namespace DogBreedingWebApp.Interfaces.Utils.Configurations
 {
 	public class ApisOptions
 	{

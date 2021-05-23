@@ -54,8 +54,6 @@ export default class BreedSelectionRowControl
     }
 
     render(){
-
-        debugger;
         if(this.props.subbreeds == null || this.props.subbreeds.length == 0)
         {
             return (

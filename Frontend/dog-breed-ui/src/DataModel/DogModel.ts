@@ -1,4 +1,4 @@
 export interface DogModel{
     breed: string;
-    subBreed: string;
+    subbreed: string;
 }

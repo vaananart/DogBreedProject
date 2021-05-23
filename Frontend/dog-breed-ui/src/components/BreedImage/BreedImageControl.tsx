@@ -1,4 +1,5 @@
 import React from "react";
+import "./BreedImage.css"
 
 interface BreedImageControlProps{
     imageUrlList?: string[]
@@ -18,19 +19,6 @@ export default class BreedImageControl
         super(props);
     }
 
-    // componentDidMount() {
-
-    //     debugger;
-    //     if(this.props.imageUrlList)
-    //         this.localimageUrlList = this.props.imageUrlList;
-    //  }
-
-    // componentDidUpdate(){
-    //     debugger;
-    //     if(this.props.imageUrlList)
-    //         this.localimageUrlList = this.props.imageUrlList;
-    // }
-
     static getDerivedStateFromProps(props: BreedImageControlProps
                                     ,state: BreedImageState)
     {
@@ -42,13 +30,12 @@ export default class BreedImageControl
 
         if(this.props.imageUrlList && this.props.imageUrlList.length > 0)
         {
-            //debugger;
             return (
                 this.props.imageUrlList.map(x=>
                     {  
                         return(
-                            <div>
-                                <img src={x} width="500" height="600"></img>
+                            <div className="wrapper">
+                                <img src={x}></img>
                             </div>
                         );
                     })

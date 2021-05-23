@@ -21,16 +21,7 @@ export default class BreedImageDisplayRowControl
     {
         super(props);
     }
-
-    // componentDidMount() {
-
-    //     debugger;
-    //  }
-
-    //  componentDidUpdate(){
-    //      debugger;
-    //  }
-
+    
     static getDerivedStateFromProps(props: BreedImageDisplayRowControlProps
                                     , state: BreedImageDisplayRowState)
     {
@@ -43,7 +34,6 @@ export default class BreedImageDisplayRowControl
         let secondHalfImages : string[] = [];
         if(this.props.breedImages)
         {
-            //debugger;
             let toggle: boolean = false;
             this.props.breedImages.forEach(x=>{
                 if(toggle)
@@ -62,7 +52,6 @@ export default class BreedImageDisplayRowControl
         else{
             return null;
         }
-        //debugger;
         return (
             <div className="row-image-grid-container">
                 <div className="row-grid-item">

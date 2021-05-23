@@ -15,6 +15,7 @@ interface BreedGridState{
     loading : boolean
     selectedBreedOptionName: string
     selectedSubBreedOptionName: string
+    isError: boolean
 }
 
 export default class BreedGridControl 
@@ -32,7 +33,8 @@ export default class BreedGridControl
             dogs: new Array(),
             subBreeds: new Array(),
             loading: false,
-            selectedBreedOptionName: ''
+            selectedBreedOptionName: '',
+            isError: false
         });
         this.onBreedSelectionEvent = this.onBreedSelectionEvent.bind(this);
         this.OnSubBreedSelectionEvent = this.OnSubBreedSelectionEvent.bind(this);
@@ -54,14 +56,18 @@ export default class BreedGridControl
                 let breedList: string[];
                 breedList = new Array();
                 yResult.forEach(x =>{
-                    // debugger;
                     if(!breedList.includes(x.breed))
                     {
                         breedList.push(x.breed);
                     }
                 }) 
                 this.breedArray = breedList
-            } );
+            } )
+            .catch((error)=>{
+                this.setState({
+                    isError:true
+                });
+            });
         this.setState({
             localbreeds : this.breedArray
         });
@@ -81,7 +87,6 @@ export default class BreedGridControl
         await fetch(`https://localhost:5001/api/dogs/${this.state.selectedBreedOptionName}/${e}/subbreed`)
         .then(x=>x.json())
         .then(y=>{
-            //debugger;
             let yResult = y as string[];
             let breedList: string[];
             breedList = new Array();
@@ -89,7 +94,11 @@ export default class BreedGridControl
                 breedList.push(x);
             }) 
             this.breedArray = breedList
-        } );
+        } ).catch((error)=>{
+            this.setState({
+                isError:true
+            });
+        });
         this.setState({
             breedImageUrls : this.breedArray
         });
@@ -115,18 +124,23 @@ export default class BreedGridControl
                 breedList.push(x);
             }) 
             this.breedArray = breedList
-        } );
+        } )
+        .catch((error)=>{
+            this.setState({
+                isError:true
+            });
+        });
     
         this.setState({
             breedImageUrls : this.breedArray
         })
         let matchedSubBreeds:string[];
         matchedSubBreeds = new Array();
-        debugger;
+
         this.state.dogs.forEach(x=>{
-            if(x.breed == e && x.subBreed != null)
+            if(x.breed == e && x.subbreed != null)
             {
-                matchedSubBreeds.push(x.subBreed);
+                matchedSubBreeds.push(x.subbreed);
             }
         });
 
@@ -142,20 +156,29 @@ export default class BreedGridControl
         if(this.state== undefined)
         {
             return (
-                <div>
-                    Loading....
+                <div className="loader">
+                </div>
+            );
+        }
+        if(this.state.isError){
+            return( 
+                <div className="error-alert">
+                    <a className="alert-heading">Opss.. Something went wrong :(</a>
                 </div>
             );
         }
         if((this.state.loading== null)||this.state.loading === true)
         {
             return (
-                <div>
-                    Loading....
+                <div className="grid-container">
+                    <div className="loader"> 
+                    </div>
+                    <h2 className="">Loading</h2>
                 </div>
+               
             );
         }
-        //debugger;
+
         if( !this.state||!this.state.localbreeds)
         {
             return (
@@ -184,7 +207,7 @@ export default class BreedGridControl
                 </div>
             );
         }
-        //debugger;
+
         returnResult = this.state.breedImageUrls;
         return (
             <div className="grid-container">

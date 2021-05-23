@@ -1,4 +1,5 @@
 import React from "react";
+import "./DropDown.css"
 
 interface SubBreedDropDownSelectionControlProps{
     subbreeds?:string[]
@@ -28,7 +29,6 @@ export default class SubBreedDropDownSelectionControl
     
     onSelectChange(e: any)
     {
-        debugger;
         var breedName = e.target.value;
         this.props.onDropDownChange(breedName);
     }
@@ -42,7 +42,6 @@ export default class SubBreedDropDownSelectionControl
                 if( this.props.selectedSubBreedOptionName && this.props.selectedSubBreedOptionName == x)
                 {
                     finalList.push( <option selected value={x}>{x}</option>);
-                    debugger;
                 }
                 else
                 {
@@ -50,9 +49,9 @@ export default class SubBreedDropDownSelectionControl
                 }
             });
         }
-        // debugger;
+
         return (
-            <select name="subBreed" id="SubBreedSlection" onChange = {this.onSelectChange}>
+            <select className="box" name="subBreed" id="SubBreedSlection" onChange = {this.onSelectChange}>
                 <option selected disabled>Choose here</option>
                 {finalList}
             </select>
