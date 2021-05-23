@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +10,6 @@ using DogBreedingWebApp.Interfaces.Utils.Http;
 
 using Microsoft.Extensions.Options;
 
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DogBreedingWebApp.Implementations.Services
@@ -45,11 +43,6 @@ namespace DogBreedingWebApp.Implementations.Services
 			return imageResult;
 		}
 
-		public IEnumerable<string> GellAllSubBreedImageURLs(string breedName)
-		{
-			throw new NotImplementedException();
-		}
-
 		public async Task<IEnumerable<DogModel>> GetAllBreed()
 		{
 			var baseUrl = _applicationOptions.BaseUrl;
@@ -64,7 +57,7 @@ namespace DogBreedingWebApp.Implementations.Services
 			var rootLevel = jObject.Values();
 			var resultPropertyNames = rootLevel.FirstOrDefault().Select(x=>(x as JProperty));
 
-			var resultList = from breed in resultPropertyNames
+			var subBreedresultList = from breed in resultPropertyNames
 							 from subBreed in (breed.Value as JArray)
 							 select new DogModel
 							 {
@@ -72,12 +65,16 @@ namespace DogBreedingWebApp.Implementations.Services
 								 SubBreed = (subBreed as JValue).Value.ToString()
 							 };
 
-			return resultList;
-		}
+			var alternativeList = from breed in resultPropertyNames
+									where (breed.Value as JArray).ToString() == "[]"
+								  select new DogModel
+							 {
+								 Breed = breed.Name
+							 };
 
-		public IEnumerable<DogModel> GetAllSubBreed(string breedName)
-		{
-			throw new NotImplementedException();
+			var finalResult = subBreedresultList.ToList();
+			finalResult.AddRange(alternativeList);
+			return finalResult.OrderBy(x=>x.Breed);
 		}
 	}
 }

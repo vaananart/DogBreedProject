@@ -6,6 +6,7 @@ import BreedImageControl from '../BreedImage/BreedImageControl'
 import { DogModel } from "../../DataModel/DogModel";
 
 interface BreedImageDisplayRowControlProps{
+    breedImages?: string[]
 }
 
 interface BreedImageDisplayRowState{
@@ -26,6 +27,10 @@ export default class BreedImageDisplayRowControl
     //     debugger;
     //  }
 
+    //  componentDidUpdate(){
+    //      debugger;
+    //  }
+
     static getDerivedStateFromProps(props: BreedImageDisplayRowControlProps
                                     , state: BreedImageDisplayRowState)
     {
@@ -33,13 +38,38 @@ export default class BreedImageDisplayRowControl
     }
 
     render(){
+
+        let firstHalfImages: string[] = [];
+        let secondHalfImages : string[] = [];
+        if(this.props.breedImages)
+        {
+            //debugger;
+            let toggle: boolean = false;
+            this.props.breedImages.forEach(x=>{
+                if(toggle)
+                {
+                    secondHalfImages.push(x)
+                    toggle = false;
+                }
+                else
+                {
+                    firstHalfImages.push(x)
+                    toggle = true;
+                }
+            });
+
+        }
+        else{
+            return null;
+        }
+        //debugger;
         return (
             <div className="row-image-grid-container">
                 <div className="row-grid-item">
-                    <BreedImageControl/>
+                    <BreedImageControl imageUrlList = {firstHalfImages}/>
                 </div>
                 <div className="row-image-grid-item">
-                    <BreedImageControl/>
+                    <BreedImageControl imageUrlList = {secondHalfImages} />
                 </div>
             </div>
         );

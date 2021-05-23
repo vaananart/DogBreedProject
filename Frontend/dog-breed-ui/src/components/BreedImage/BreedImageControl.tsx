@@ -1,7 +1,7 @@
 import React from "react";
 
 interface BreedImageControlProps{
-
+    imageUrlList?: string[]
 }
 
 interface BreedImageState{
@@ -12,6 +12,7 @@ export default class BreedImageControl
     extends React.Component<BreedImageControlProps
                             , BreedImageState>
 {
+    private localimageUrlList: string[]=[];
     constructor(props: BreedImageControlProps)
     {
         super(props);
@@ -20,7 +21,15 @@ export default class BreedImageControl
     // componentDidMount() {
 
     //     debugger;
+    //     if(this.props.imageUrlList)
+    //         this.localimageUrlList = this.props.imageUrlList;
     //  }
+
+    // componentDidUpdate(){
+    //     debugger;
+    //     if(this.props.imageUrlList)
+    //         this.localimageUrlList = this.props.imageUrlList;
+    // }
 
     static getDerivedStateFromProps(props: BreedImageControlProps
                                     ,state: BreedImageState)
@@ -29,8 +38,21 @@ export default class BreedImageControl
     }
 
     render(){
-        return (
-            <img src="https://images.dog.ceo/breeds/bulldog-boston/20200710_175933.jpg" alt="Dog-breed-Image" width="500" height="600"/>
-        );
+        let imgList:any[] = new Array();
+
+        if(this.props.imageUrlList && this.props.imageUrlList.length > 0)
+        {
+            //debugger;
+            return (
+                this.props.imageUrlList.map(x=>
+                    {  
+                        return(
+                            <div>
+                                <img src={x} width="500" height="600"></img>
+                            </div>
+                        );
+                    })
+            );
+        }
     }
 }

@@ -11,9 +11,7 @@ namespace DogBreedingWebApp.Interfaces.Services
 {
 	public interface IDogService
 	{
-		IEnumerable<DogModel> GetAllSubBreed(string breedName);
 		Task<IEnumerable<DogModel>> GetAllBreed();
 		Task<IEnumerable<string>> GellAllBreedImageURLs(string breed, string subbreed = null);
-		IEnumerable<string> GellAllSubBreedImageURLs(string breedName);
 	}
 }
