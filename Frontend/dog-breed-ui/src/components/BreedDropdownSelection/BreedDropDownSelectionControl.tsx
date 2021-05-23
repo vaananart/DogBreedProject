@@ -21,12 +21,6 @@ export default class BreedDropDownSelectionControl
         this.onSelectChange = this.onSelectChange.bind(this);
     }
 
-    static getDerivedStateFromProps(props: BreedDropDownSelectionControlProps
-                                    ,state: BreedDropDownSelectionState)
-    {
-        return state;
-    }
-
     onSelectChange(e: any)
     {
         var breedName = e.target.value;

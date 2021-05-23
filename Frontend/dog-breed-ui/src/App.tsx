@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import BreedGridControl from './components/BreedGrid/BreedGridControl'
 export class  App extends React.Component{
 

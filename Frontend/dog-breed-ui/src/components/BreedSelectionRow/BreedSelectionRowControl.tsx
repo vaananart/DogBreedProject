@@ -21,20 +21,14 @@ interface BreedSelectionRowState{
 }
 
 export default class BreedSelectionRowControl 
-    extends React.Component<BreedSelectionRowControlProps
-                            , BreedSelectionRowState>
+                extends React.Component<BreedSelectionRowControlProps
+                                        , BreedSelectionRowState>
 {
     constructor(props: BreedSelectionRowControlProps)
     {
         super(props);
         this.OnActionChange = this.OnActionChange.bind(this);
         this.OnSubBreedSelectionChange = this.OnSubBreedSelectionChange.bind(this);
-    }
-
-    static getDerivedStateFromProps(props: BreedSelectionRowControlProps
-                                    ,state: BreedSelectionRowState)
-    {
-        return state;
     }
 
     OnActionChange(e:any)

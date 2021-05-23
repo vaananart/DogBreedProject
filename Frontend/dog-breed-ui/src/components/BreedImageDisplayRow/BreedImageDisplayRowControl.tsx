@@ -21,15 +21,8 @@ export default class BreedImageDisplayRowControl
     {
         super(props);
     }
-    
-    static getDerivedStateFromProps(props: BreedImageDisplayRowControlProps
-                                    , state: BreedImageDisplayRowState)
-    {
-        return state;
-    }
 
     render(){
-
         let firstHalfImages: string[] = [];
         let secondHalfImages : string[] = [];
         if(this.props.breedImages)

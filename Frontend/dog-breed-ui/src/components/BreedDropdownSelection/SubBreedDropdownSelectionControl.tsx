@@ -20,12 +20,6 @@ export default class SubBreedDropDownSelectionControl
         super(props);
         this.onSelectChange = this.onSelectChange.bind(this);
     }
-
-    static getDerivedStateFromProps(props: SubBreedDropDownSelectionControlProps
-                                    ,state: SubBreedDropDownSelectionState)
-    {
-        return state;
-    }
     
     onSelectChange(e: any)
     {

@@ -19,12 +19,6 @@ export default class BreedImageControl
         super(props);
     }
 
-    static getDerivedStateFromProps(props: BreedImageControlProps
-                                    ,state: BreedImageState)
-    {
-        return state;
-    }
-
     render(){
         let imgList:any[] = new Array();
 
