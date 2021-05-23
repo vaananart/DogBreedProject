@@ -68,8 +68,8 @@ namespace DogBreedingWebApp.Implementations.Services
 							 from subBreed in (breed.Value as JArray)
 							 select new DogModel
 							 {
-								 BreedName= breed.Name,
-								 SubBreedName = (subBreed as JValue).Value.ToString()
+								 Breed = breed.Name,
+								 SubBreed = (subBreed as JValue).Value.ToString()
 							 };
 
 			return resultList;

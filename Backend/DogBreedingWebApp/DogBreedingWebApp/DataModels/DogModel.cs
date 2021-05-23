@@ -7,7 +7,7 @@ namespace DogBreedingWebApp.DataModels
 {
 	public class DogModel
 	{
-		public string BreedName { get; set; }
-		public string SubBreedName { get; set; }
+		public string Breed { get; set; }
+		public string SubBreed { get; set; }
 	}
 }
