@@ -14,7 +14,10 @@ using DogBreedingWebApp.Interfaces.Utils.Configurations;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
+using Moq;
 
 using NUnit.Framework;
 
@@ -41,8 +44,12 @@ namespace DogBreedingWebAppTests.Integration
 		public async Task GetAllBreedsAndPossibleSubBreeds_WhenRequestedFor_AllBreed_ShouldReturnAllBreedAndSubBreed()
 		{
 			//Arrange
-			HttpGETClient client = new HttpGETClient(new DefaultHttpClientFactory());
-			IDogService dogService = new DogService(Options.Create(new ApplicationOptions
+			var _mockLogger = new Mock<ILogger<HttpGETClient>>();
+			var _mockServiceLogger = new Mock<ILogger<DogService>>();
+			var _controllerLogger = new Mock<ILogger<DogsController>>();
+
+			HttpGETClient client = new HttpGETClient(_mockLogger.Object, new DefaultHttpClientFactory());
+			IDogService dogService = new DogService(_mockServiceLogger.Object, Options.Create(new ApplicationOptions
 			{
 				BaseUrl= "https://dog.ceo/"
 			}), Options.Create(new ApisOptions {
@@ -50,7 +57,7 @@ namespace DogBreedingWebAppTests.Integration
 				BreedImageURL="api/breed/{breedName}/images",
 				SubBreedImageURL= "api/breed/{0}{1}/images"
 			}), client);
-			DogsController dogController = new DogsController(dogService);
+			DogsController dogController = new DogsController(_controllerLogger.Object, dogService);
 			//Action
 
 			var result = await dogController.GetAllBreedsAndPossibleSubBreeds();
@@ -63,8 +70,12 @@ namespace DogBreedingWebAppTests.Integration
 		public async Task GetAllBreedsImageURL_WhenRequestedFor_ABreed_ShouldReturnTheBreedImageURLs()
 		{
 			//Arrange
-			HttpGETClient client = new HttpGETClient(new DefaultHttpClientFactory());
-			IDogService dogService = new DogService(Options.Create(new ApplicationOptions
+			var _mockLogger = new Mock<ILogger<HttpGETClient>>();
+			var _mockServiceLogger = new Mock<ILogger<DogService>>();
+			var _controllerLogger = new Mock<ILogger<DogsController>>();
+
+			HttpGETClient client = new HttpGETClient(_mockLogger.Object, new DefaultHttpClientFactory());
+			IDogService dogService = new DogService(_mockServiceLogger.Object, Options.Create(new ApplicationOptions
 			{
 				BaseUrl = "https://dog.ceo/"
 			}), Options.Create(new ApisOptions
@@ -73,7 +84,7 @@ namespace DogBreedingWebAppTests.Integration
 				BreedImageURL = "api/breed/{breedName}/images",
 				SubBreedImageURL = "api/breed/{0}{1}/images"
 			}), client);
-			DogsController dogController = new DogsController(dogService);
+			DogsController dogController = new DogsController(_controllerLogger.Object, dogService);
 			//Action
 
 			var result = await dogController.GetAllBreedsImageURL("australian");
@@ -87,8 +98,12 @@ namespace DogBreedingWebAppTests.Integration
 		public async Task GetAllBreedsAndPossibleSubBreedsImageURL_WhenRequestedFor_ASubBreed_ShouldReturnTheSubBreedImageURLs()
 		{
 			//Arrange
-			HttpGETClient client = new HttpGETClient(new DefaultHttpClientFactory());
-			IDogService dogService = new DogService(Options.Create(new ApplicationOptions
+			var _mockLogger = new Mock<ILogger<HttpGETClient>>();
+			var _mockServiceLogger = new Mock<ILogger<DogService>>();
+			var _controllerLogger = new Mock<ILogger<DogsController>>();
+
+			HttpGETClient client = new HttpGETClient(_mockLogger.Object, new DefaultHttpClientFactory());
+			IDogService dogService = new DogService(_mockServiceLogger.Object, Options.Create(new ApplicationOptions
 			{
 				BaseUrl = "https://dog.ceo/"
 			}), Options.Create(new ApisOptions
@@ -97,7 +112,7 @@ namespace DogBreedingWebAppTests.Integration
 				BreedImageURL = "api/breed/{breedName}/images",
 				SubBreedImageURL = "api/breed/{0}{1}/images"
 			}), client);
-			DogsController dogController = new DogsController(dogService);
+			DogsController dogController = new DogsController(_controllerLogger.Object, dogService);
 			//Action
 
 			var result = await dogController.GetAllBreedsAndPossibleSubBreedsImageURL("australian", "shepherd");

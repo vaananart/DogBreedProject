@@ -4,14 +4,19 @@ using System.Threading.Tasks;
 
 using DogBreedingWebApp.Interfaces.Utils.Http;
 
+using Microsoft.Extensions.Logging;
+
 namespace DogBreedingWebApp.Implementations.Utils.Http
 {
 	public class HttpGETClient: IHttpGETClient
 	{
+		private readonly ILogger _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
 
-		public HttpGETClient(IHttpClientFactory httpClientFactory)
+		public HttpGETClient(ILogger<HttpGETClient> logger
+								, IHttpClientFactory httpClientFactory)
 		{
+			_logger = logger;
 			_httpClientFactory = httpClientFactory;
 		}
 
@@ -26,17 +31,18 @@ namespace DogBreedingWebApp.Implementations.Utils.Http
 					if (result.IsSuccessStatusCode)
 					{
 						response = await result.Content.ReadAsStringAsync();
-						//REVIEW: lOGGING NEEDED IN HERE
+						_logger.LogInformation($"HttpGETClient:Get:{fullUrl} => has made a suceessful request.");
 					}
 					else
 					{
-						//REVIEW: lOGGING NEEDED IN HERE
+						_logger.LogWarning($"HttpGETClient:Get:{fullUrl} => has made made a failed request.");
+						_logger.LogWarning($"HttpGETClient:Get:{fullUrl} => reqsponse status is {result.StatusCode}.");
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				//REVIEW: THROW EXCEPTIONS 
+				throw new HttpRequestException(ex.Message);
 			}
 			return response;
 		}
